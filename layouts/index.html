@@ -1,0 +1,19 @@
+{{ partialCached "header/head.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+  <div id="container">
+    <div id="content">
+        <h1 class="animated flipInX"><a href="/">{{ .Title }}</a></h1>
+        <div class="article">
+            {{ .Content }}
+        </div>
+
+        {{ if isset .Site.Params "social" }}
+            {{ partialCached "social.html" . }}
+        {{ end }}
+    </div>
+  </div>
+
+
+{{ partialCached "footer/foot.html" . }}

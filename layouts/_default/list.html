@@ -1,0 +1,21 @@
+{{ partialCached "header/head.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+  <div id="container">
+    <div id="content">
+
+        <h1>{{ .Title }}</h1>
+
+        {{ range .Paginator.Pages }}
+           <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+           {{ .Description }}
+        {{ end }}
+
+        {{ template "_internal/pagination.html" . }}
+
+    </div>
+
+  </div>
+
+{{ partialCached "footer/foot.html" . }}

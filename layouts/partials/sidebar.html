@@ -1,0 +1,41 @@
+<div id="sidebar-border"></div>
+<div id="sidebar">
+  {{ if $.Site.Params.portrait }}
+  <a href="{{ $.Site.Params.portrait | absURL }}" class="image-link">
+    <img class="logo animated flipInY" src="{{ $.Site.Params.portrait | absURL }}"/>
+  </a>
+  {{ end }}
+
+  <h1 class="center"><a href="{{ .Site.BaseURL }}" style="text-decoration: none;">{{ $.Site.Title }}</a></h1>
+  <p class="center">{{ $.Site.Params.description }}</p>
+  <hr/>
+
+  <h3>Categories</h3>
+  <ul>
+      {{ range $key, $value := .Site.Taxonomies.categories }}
+      <li>
+          <a href="/categories/{{ $key | urlize }}">{{ $key | humanize }}</a> ({{ len $value }})
+      </li>
+      {{ end }}
+  </ul>
+
+  <h3>Recent posts</h3>
+  <ul>
+    {{ range first 10 (where .Site.RegularPages "Section" "posts") }}
+      <li>
+        <small><i>{{ .Lastmod.Format "1/06" }}</i></small>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+
+  <h3>Recent projects</h3>
+  <ul>
+    {{ range first 10 (where .Site.RegularPages "Section" "projects") }}
+      <li>
+        <small><i>{{ .Lastmod.Format "1/06" }}</i></small>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</div>

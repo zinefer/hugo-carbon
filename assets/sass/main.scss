@@ -34,8 +34,12 @@ code {
   background-color: #3b3d42;
 }
 
-figure {
+.frame {
   line-height: 0px;
+  padding: 0.25rem;
+  margin: 0.45rem;
+  background-color: #cccc;
+  display:inline-block;
 }
 
 figcaption {

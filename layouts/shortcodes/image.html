@@ -8,13 +8,9 @@
 {{ else if eq $command "Fill"}}
 {{ .Scratch.Set "image" ($original.Fill $options) }}
 {{ else }}
-{{ errorf "Invalid image processing command: Must be one of Fit, Fill or Resize."}}
+{{ .Scratch.Set "image" $original }}
 {{ end }}
 {{ $image := .Scratch.Get "image" }}
 {{ $float := .Get 3 }}
-<figure style="padding: 0.25rem; margin: 1rem; background-color: #cccc; display:inline-block" class="{{ $float }}">
-	<img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
-	{{ with .Inner }}
-	<figcaption><small>{{ . }}</small></figcaption>
-	{{ end }}
-</figure>
+
+{{ partial "image.html" (dict "Original" $original "Image" $image "Float" $float "Caption" .Inner) }}

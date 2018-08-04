@@ -1,0 +1,8 @@
+<figure class="frame {{ .Float }}">
+  <a href="{{ .Original.RelPermalink }}" class="image-link">
+    <img src="{{ .Image.RelPermalink }}" width="{{ .Image.Width }}" height="{{ .Image.Height }}">
+  </a>
+  {{ with .Caption }}
+    <figcaption><small>{{ . }}</small></figcaption>
+  {{ end }}
+</figure>

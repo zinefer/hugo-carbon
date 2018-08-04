@@ -71,8 +71,8 @@ figcaption {
     display: table;
 }
 
-#side ul li small {
-    padding-left: 2px;
+#sidebar ul li small {
+    padding-right: 10px;
 }
 
 #sidebar ul li a,small {
@@ -82,6 +82,7 @@ figcaption {
 #sidebar ul li a {
     width: 100%;
     text-align: center;
+    padding-right: 4px;
 }
 
 #sidebar ul li:hover {
@@ -140,15 +141,38 @@ img[src$='#floatright'] {
     float: right;
 }
 
-.pagination {
-    list-style-type: none;
-    text-align: center;
+.page-holder {
+    text-align:center;
 }
 
-.page-item {
-    padding:3px;
+.pagination {
     display: inline-block;
     border: solid 1px #4a4b50;
+    border-radius: 0.25em;
+    padding-left: 0;
+}
+
+.pagination .disabled {
+    display: none;
+}
+
+.pagination .active {
+    background-color: #3b3d42;
+}
+
+.page-item:hover {
+    background-color: #4a4b50;
+}
+
+.pagination li {
+    padding: 0.6em 0.8em;
+    display: inline-block;
+    border-right: solid 1px #4a4b50;
+    float:left;
+}
+
+.page-item:last-of-type {
+    border-right: none;
 }
 
 

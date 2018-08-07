@@ -9,9 +9,9 @@
     <center>
   {{ end }}
 
-  {{ $image := ($original.Fit "225x700") }}
+  {{ $image := ($original.Fill "225x225 center") }}
 
-  {{ partial "image.html" (dict "Original" $original "Image" $image "Float" "floatleft") }}
+  {{ partial "image.html" (dict "Original" $original "Image" $image) }}
 
   {{ if eq ($scratch.Get "output") 2 }}
     </center>
@@ -21,6 +21,6 @@
 
 {{ end }}
 
-{{ if ne ($scratch.Get "output") 2 }}
+{{ if ne ($scratch.Get "output") 0 }}
   </center>
 {{ end }}

@@ -19,21 +19,21 @@
       {{ end }}
   </ul>
 
-  <h3>Recent posts</h3>
+  <h3><a href="{{ "/posts" | absURL }}">Recent posts</a></h3>
   <ul>
-    {{ range first 10 (where .Site.RegularPages "Section" "posts") }}
+    {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
       <li>
-        <small><i>{{ .Lastmod.Format "1/06" }}</i></small>
+        <small><i>{{ .Lastmod.Format "1/2/06" }}</i></small>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </li>
     {{ end }}
   </ul>
 
-  <h3>Recent projects</h3>
+  <h3><a href="{{ "/projects" | absURL }}">Recent projects</a></h3>
   <ul>
-    {{ range first 10 (where .Site.RegularPages "Section" "projects") }}
+    {{ range first 5 (where .Site.RegularPages "Section" "projects") }}
       <li>
-        <small><i>{{ .Lastmod.Format "1/06" }}</i></small>
+        <small><i>{{ .Lastmod.Format "1/2/06" }}</i></small>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </li>
     {{ end }}

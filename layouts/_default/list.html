@@ -7,10 +7,25 @@
 
         <h1>{{ .Title }}</h1>
 
-        {{ range .Paginator.Pages }}
-           <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-           {{ .Description }}
-        {{ end }}
+        <ul class="article-list">
+          {{ range .Paginator.Pages }}
+            <li>
+              <div class="thumb">
+                {{ partial "thumbnail.html" . }}
+              </div>
+              <div class="article">
+                <h3 class="m-0"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                <small class="p-b-2">in {{ partial "category.html" .Params.Categories }} on {{ .Lastmod.Format "January 2, 2006" }}</small>
+                <p class="m-2">{{ .Description }}</p>
+                <small class="p-t-2" style="display: block;">
+                  {{ range .Params.tags }}
+                    {{ partial "tag.html" . }}
+                  {{ end }}
+                </small>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
 
         {{ partial "pagination.html" . }}
 

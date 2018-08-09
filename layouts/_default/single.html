@@ -3,23 +3,23 @@
 {{ partial "sidebar.html" . }}
 
   <div id="container">
-  	<div id="content">
-	    <h1 class="animated flipInX"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-	    <p class="post-info animated fadeIn">
-	    	<i>
-	    		{{ .Lastmod.Format "January 2, 2006" }} |
-			  	{{ range .Params.tags }}
-			    	<a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">{{ . }}</a>
-			  	{{ end }}
-	    	</i>
-	    </p>
-	    {{ .Content }}
+    <div id="content">
+      <h1 class="animated flipInX m-b-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+      <p class="post-info animated fadeIn m-t-1">
+        <i>in {{ partial "category.html" .Params.Categories }} on {{ .Lastmod.Format "January 2, 2006" }}</i> |
+        <small>
+          {{ range .Params.tags }}
+            {{ partial "tag.html" . }}
+          {{ end }}
+        </small>
+      </p>
 
+      {{ .Content }}
 
-	    {{ if isset .Site.Params "social" }}
-	        {{ partialCached "social.html" . }}
-	    {{ end }}
-	</div>
+      {{ if isset .Site.Params "social" }}
+          {{ partialCached "social.html" . }}
+      {{ end }}
+  </div>
   </div>
 
 {{ partialCached "footer/foot.html" . }}

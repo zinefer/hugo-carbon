@@ -10,6 +10,7 @@
         <ul class="article-list">
           {{ range .Paginator.Pages }}
 
+            <!--
             {{ with index (.Resources.ByType "image") 0 }}
               {{ $image := (.Fill "700x200 center").RelPermalink }}
               <li class="p-0 m-b-2" style="background-image: url('{{ $image }}'); width: 700px; height: 200px;">
@@ -18,12 +19,12 @@
                 </div>
               </li>
             {{ end }}
+            -->
 
 
 
 
 
-            <!--
             <li>
               <div class="thumb">
                 {{ partial "thumbnail.html" . }}
@@ -39,7 +40,7 @@
                 </small>
               </div>
             </li>
-          -->
+
           {{ end }}
         </ul>
 

@@ -8,16 +8,25 @@
 
   <h1 class="center"><a href="{{ .Site.BaseURL }}" style="text-decoration: none;">{{ $.Site.Title }}</a></h1>
   <p class="center">{{ $.Site.Params.description }}</p>
-  <hr/>
+
+  <div class="social center">
+    <a href="mailto:zinefer@gmail.com"><span class="socicon-mail"></span> Email</a>
+    <a href="https://github.com/zinefer"><span class="socicon-github"></span> Github</a>
+  </div>
 
   <h3>Categories</h3>
-  <ul>
+  <ul class="categories">
       {{ range $key, $value := .Site.Taxonomies.categories }}
       <li>
           <a href="/categories/{{ $key | urlize }}">{{ $key | humanize }}</a> ({{ len $value }})
       </li>
       {{ end }}
   </ul>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
 
   <h3><a href="{{ "/posts" | absURL }}">Recent posts</a></h3>
   <ul>

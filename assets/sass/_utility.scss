@@ -1,0 +1,33 @@
+$sides: (top, bottom, left, right);
+$margins: (0, 0.1em, 0.3em);
+$paddings: (0, 0.1em, 0.3em);
+
+@for $i from 1 through length($margins) {
+  $j: $i - 1;
+  $margin: nth($margins, $i);
+  .m-#{$j} {
+    margin: #{$margin} !important;
+  }
+  @each $side in $sides {
+    .m-#{str-slice($side, 0, 1)}-#{$j} {
+      margin-#{$side}: #{$margin} !important;
+    }
+  }
+}
+
+@for $i from 1 through length($paddings) {
+  $j: $i - 1;
+  $padding: nth($paddings, $i);
+  .p-#{$j} {
+    padding: #{$padding} !important;
+  }
+  @each $side in $sides {
+    .p-#{str-slice($side, 0, 1)}-#{$j} {
+      padding-#{$side}: #{$padding} !important;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}

@@ -6,7 +6,7 @@
     <div id="content">
       <h1>{{ .Title }}</h1>
 
-      <ul class="article-list">
+      <ul id="list">
         {{ range $key, $value := .Data.Terms.Alphabetical }}
           {{ $MostRecentPost := index $value.Pages 0 }}
           <li>

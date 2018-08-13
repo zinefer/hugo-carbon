@@ -67,6 +67,16 @@ video {
       padding: 0.5em;
       border-radius: 5px;
       text-decoration: none;
+      display: inline-block;
+      transition: background .5s ease-in-out;
+
+      &:hover {
+        background-color: $dark-border-color;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
 
       span {
         font-size: 1.2em;
@@ -81,7 +91,7 @@ video {
 
     small {
       position: relative;
-      top: -2px;
+      top: -1px;
     }
 
     li {
@@ -154,8 +164,9 @@ video {
     padding: 0.3em;
     border-radius: 5px;
     width:100%;
+    transition: background .5s ease-in-out;
     &:hover {
-      background-color: $dark-background-secondary;
+      background-color: $dark-border-color-secondary;
     }
   }
   .thumb {
@@ -233,6 +244,10 @@ img {
   }
 }
 
+.image-link {
+  cursor: zoom-in;
+}
+
 .floatleft {
   float: left;
 }
@@ -278,6 +293,10 @@ img {
 
     &:hover {
       background-color: $dark-border-color;
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
 
     &.prev a::before, &.next a::after {
@@ -338,6 +357,10 @@ img {
   padding: 0.1em 0.4em;
   margin: 0.1em;
   border-radius: 5px;
+  text-decoration: none;
+  &:hover {
+    background-color: $dark-border-color;
+  }
 }
 
 
@@ -346,7 +369,6 @@ img {
 @media (max-width: 1350px) {
   #sidebar {
     width: 200px;
-
     .categories  {
       li {
         width: 78px;

@@ -15,7 +15,7 @@
       {{ $articleb := index $sectionb.Pages 0 }}
 
       <div>
-        {{ with index ($articlea.Resources.ByType "image") 0 }}
+        {{ with or (index ($articlea.Resources.Match "thumb.*") 0) (index ($articlea.Resources.ByType "image") 0) }}
 
           {{ $image := (.Fill "475x275 center") }}
           <figure class="frame" style="float: left">
@@ -32,7 +32,7 @@
 
         {{ end }}
 
-        {{ with index ($articleb.Resources.ByType "image") 0 }}
+        {{ with or (index ($articleb.Resources.Match "thumb.*") 0) (index ($articleb.Resources.ByType "image") 0) }}
 
           {{ $image := (.Fill "475x275 center") }}
           <figure class="frame" style="float: right">

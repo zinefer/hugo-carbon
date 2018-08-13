@@ -1,4 +1,4 @@
-{{ with index (.Resources.ByType "image") 0 }}
+{{ with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}
   {{ $image := (.Fill "125x100 center") }}
   {{ partial "image.html" (dict "Original" . "Image" $image) }}
 {{ else }}

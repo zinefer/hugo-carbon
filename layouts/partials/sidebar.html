@@ -9,7 +9,7 @@
   <h1 class="center"><a href="{{ .Site.BaseURL }}" style="text-decoration: none;">{{ $.Site.Title }}</a></h1>
   <p class="center">{{ $.Site.Params.description }}</p>
 
-  <div class="social center">
+  <div class="social">
     <a href="mailto:zinefer@gmail.com"><span class="socicon-mail"></span> Email</a>
     <a href="https://github.com/zinefer"><span class="socicon-github"></span> Github</a>
   </div>
@@ -18,18 +18,13 @@
   <ul class="categories">
       {{ range $key, $value := .Site.Taxonomies.categories }}
       <li>
-          <a href="/categories/{{ $key | urlize }}">{{ $key | humanize }}</a> ({{ len $value }})
+          <small>({{ len $value }})</small> <a href="/categories/{{ $key | urlize }}">{{ $key | humanize }}</a>
       </li>
       {{ end }}
   </ul>
 
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-
   <h3><a href="{{ "/posts" | absURL }}">Recent posts</a></h3>
-  <ul>
+  <ul class="section">
     {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
       <li>
         <small><i>{{ .Lastmod.Format "1/2/06" }}</i></small>
@@ -39,7 +34,7 @@
   </ul>
 
   <h3><a href="{{ "/projects" | absURL }}">Recent projects</a></h3>
-  <ul>
+  <ul class="section">
     {{ range first 5 (where .Site.RegularPages "Section" "projects") }}
       <li>
         <small><i>{{ .Lastmod.Format "1/2/06" }}</i></small>

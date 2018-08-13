@@ -16,10 +16,8 @@
 
       {{ .Content }}
 
-      {{ if isset .Site.Params "social" }}
-          {{ partialCached "social.html" . }}
-      {{ end }}
-  </div>
+      {{ partialCached "footer/content-foot.html" . }}
+    </div>
   </div>
 
 {{ partialCached "footer/foot.html" . }}

@@ -59,11 +59,8 @@
       </div>
 
       <br/>
-      <br/>
 
-      {{ if isset .Site.Params "social" }}
-        {{ partialCached "social.html" . }}
-      {{ end }}
+      {{ partialCached "footer/content-foot.html" . }}
     </div>
   </div>
 

@@ -4,31 +4,30 @@
 
   <div id="container">
     <div id="content">
+      <h1>{{ .Title }}</h1>
 
-        <h1>{{ .Title }}</h1>
+      <ul class="article-list">
+        {{ range $key, $value := .Data.Terms.Alphabetical }}
+          {{ $MostRecentPost := index $value.Pages 0 }}
+          <li>
+            <div class="thumb">
+              {{ partial "thumbnail.html" $MostRecentPost }}
+            </div>
+            <div class="article">
+              <h3 class="m-1">{{ partial "category.html" $value.Name }}</h3>
+              <small class="p-b-2">
+                {{ $value.Count }} Total posts <br/>
+                Last post was on {{ $MostRecentPost.Lastmod.Format "January 2, 2006" }}
+              </small>
+            </div>
+          </li>
+        {{ end }}
+      </ul>
 
-        <ul class="article-list">
-          {{ range $key, $value := .Data.Terms.Alphabetical }}
-            {{ $MostRecentPost := index $value.Pages 0 }}
-            <li>
-              <div class="thumb">
-                {{ partial "thumbnail.html" $MostRecentPost }}
-              </div>
-              <div class="article">
-                <h3 class="m-1">{{ partial "category.html" $value.Name }}</h3>
-                <small class="p-b-2">
-                  {{ $value.Count }} Total posts <br/>
-                  Last post was on {{ $MostRecentPost.Lastmod.Format "January 2, 2006" }}
-                </small>
-              </div>
-            </li>
-          {{ end }}
-        </ul>
+      {{ partial "pagination.html" . }}
 
-        {{ partial "pagination.html" . }}
-
+      {{ partialCached "footer/content-foot.html" . }}
     </div>
-
   </div>
 
 {{ partialCached "footer/foot.html" . }}

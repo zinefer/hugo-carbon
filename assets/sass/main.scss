@@ -58,15 +58,6 @@ video {
     width: 97%;
   }
 
-  .categories {
-    text-align: center;
-
-    li {
-      width: 45%;
-      float: left;
-    }
-  }
-
   .social {
     border-top: 1px solid $dark-color;
     padding-top: 15px;
@@ -74,8 +65,8 @@ video {
     text-align: center;
 
     a {
-      padding: 0.5em;
       background-color: $dark-background-secondary;
+      padding: 0.5em;
       border-radius: 5px;
       text-decoration: none;
 
@@ -84,6 +75,31 @@ video {
         position: relative;
         top: 2px;
       }
+    }
+  }
+
+  .categories {
+    //text-align: center;
+
+    li {
+      padding: 2px 10px;
+      width: 115px;
+      display: inline-block;
+    }
+  }
+
+  .section {
+    a {
+      width: 100%;
+      padding-left: 10px;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    small {
+      display: table-cell;
+      vertical-align: middle;
+      min-width: 45px;
     }
   }
 
@@ -101,25 +117,12 @@ video {
     li {
       padding: 2px;
       border-radius: 5px;
+      margin: 0;
       display: table;
-      transition: .5s ease-in-out;
+      transition: background .5s ease-in-out;
 
       &:hover {
         background-color: $dark-border-color;
-      }
-
-      a {
-        width: 100%;
-        padding-right: 4px;
-        padding-left: 10px;
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      small {
-        display: table-cell;
-        vertical-align: middle;
-        min-width: 45px;
       }
     }
   }
@@ -163,7 +166,10 @@ video {
   }
 }
 
-.foot {
+
+/* Foot */
+
+#foot {
   border-top: 1px solid $dark-color;
   padding-top: 15px;
   margin-bottom:15px;
@@ -337,6 +343,15 @@ img {
 @media (max-width: 1350px) {
   #sidebar {
     width: 200px;
+
+    .categories  {
+      li {
+        width: 78px;
+      }
+      small {
+        display: none;
+      }
+    }
   }
   #container {
     width: calc(100% - 225px);

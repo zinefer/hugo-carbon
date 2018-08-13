@@ -8,28 +8,58 @@
       <!-- <h1 class="animated flipInX"><a href="/">{{ $.Site.Title }}</a></h1> -->
 
       <!-- Most Recent Project -->
-      {{ $project := index (where .Site.RegularPages "Section" "projects") 0 }}
-      {{ if $project }}
-        {{ with index ($project.Resources.ByType "image") 0 }}
-          {{ $image := (.Fill "1000x300 center") }}
-          <!-- {{ partial "image.html" (dict "Original" . "Image" $image) }} -->
+      {{ $sectiona := index .Site.Sections 0 }}
+      {{ $sectionb := index .Site.Sections 1 }}
 
-          <div style="position: relative;background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
+      {{ $articlea := index $sectiona.Pages 0 }}
+      {{ $articleb := index $sectionb.Pages 0 }}
 
-            <div>
-              <h3 class="m-b-1" style="position:absolute;bottom:0;color:white"><a href="{{ $project.Permalink }}">{{ $project.Title }}</a></h3>
+      <div>
+        {{ with index ($articlea.Resources.ByType "image") 0 }}
+
+          {{ $image := (.Fill "475x275 center") }}
+          <figure class="frame" style="float: left">
+            <div style="overflow:hidden;background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
+                <h1 class="bg-gradient top m-0" style="">
+                  Latest post
+                </h1>
+
+                <h1 class="bg-gradient bottom m-0" style="">
+                  <a href="{{ $articlea.Permalink }}">{{ $articlea.Title }}</a>
+                </h1>
             </div>
-          </div>
+          </figure>
 
         {{ end }}
-      {{ end }}
 
-      <hr/>
+        {{ with index ($articleb.Resources.ByType "image") 0 }}
 
+          {{ $image := (.Fill "475x275 center") }}
+          <figure class="frame" style="float: right">
+            <div style="overflow:hidden; background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
+                <h1 class="bg-gradient top m-0" style="">
+                  Latest project
+                </h1>
+
+                <h1 class="bg-gradient bottom m-0" style="">
+                  <a href="{{ $articleb.Permalink }}">{{ $articleb.Title }}</a>
+                </h1>
+            </div>
+          </figure>
+
+        {{ end }}
+      </div>
+
+      <div style="clear:both"></div>
+
+      <br/>
 
       <div class="article">
         {{ .Content }}
       </div>
+
+      <br/>
+      <br/>
 
       {{ if isset .Site.Params "social" }}
         {{ partialCached "social.html" . }}

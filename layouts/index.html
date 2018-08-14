@@ -18,15 +18,15 @@
         {{ with or (index ($articlea.Resources.Match "thumb.*") 0) (index ($articlea.Resources.ByType "image") 0) }}
 
           {{ $image := (.Fill "475x275 center") }}
-          <figure class="frame" style="float: left">
-            <div style="overflow:hidden;background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
-                <h1 class="bg-gradient top m-0" style="">
+          <figure class="frame latest-container" style="float: left">
+            <div class="latest" style="background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
+                <h1 class="bg-gradient top m-0">
                   Latest post
                 </h1>
 
-                <h1 class="bg-gradient bottom m-0" style="">
+                <h2 class="bg-gradient bottom m-0">
                   <a href="{{ $articlea.Permalink }}">{{ $articlea.Title }}</a>
-                </h1>
+                </h2>
             </div>
           </figure>
 
@@ -35,15 +35,15 @@
         {{ with or (index ($articleb.Resources.Match "thumb.*") 0) (index ($articleb.Resources.ByType "image") 0) }}
 
           {{ $image := (.Fill "475x275 center") }}
-          <figure class="frame" style="float: right">
-            <div style="overflow:hidden; background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
-                <h1 class="bg-gradient top m-0" style="">
+          <figure class="frame latest-container" style="float: right">
+            <div class="latest" style="background-image: url('{{ $image.RelPermalink }}'); height: {{ $image.Height }}px; width: {{ $image.Width }}px">
+                <h1 class="bg-gradient top m-0">
                   Latest project
                 </h1>
 
-                <h1 class="bg-gradient bottom m-0" style="">
+                <h2 class="bg-gradient bottom m-0">
                   <a href="{{ $articleb.Permalink }}">{{ $articleb.Title }}</a>
-                </h1>
+                </h2>
             </div>
           </figure>
 

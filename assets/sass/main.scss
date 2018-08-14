@@ -218,7 +218,7 @@ video {
   line-height: 0px;
   padding: 0.25rem;
   margin: 0.45rem;
-  background-color: #ccc;
+  background-color: $dark-color;
   display:inline-block;
 
   &:hover .bg-gradient.top {
@@ -226,7 +226,7 @@ video {
   }
 
   &:hover .bg-gradient.bottom {
-    top: -15%;
+    top: 0%;
   }
 }
 
@@ -358,8 +358,38 @@ img {
   margin: 0.1em;
   border-radius: 5px;
   text-decoration: none;
+  transition: background .5s ease-in-out;
   &:hover {
     background-color: $dark-border-color;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+
+/* Latest */
+
+.latest-container {
+  max-width: 45%;
+}
+
+.latest {
+  background-position: center;
+  overflow:hidden;
+  max-width: 100%;
+}
+
+
+/* Mosaic */
+
+.mosaic {
+  .col {
+    display: inline-block;
+
+    &.small {
+      width: 184px;
+    }
   }
 }
 
@@ -397,11 +427,36 @@ img {
     min-width: 320px;
     figure {
       display: block;
+
     }
     img {
-      max-width: 100%;
-      width: auto;
+      width: 100%;
       height: auto;
+    }
+    video {
+      width: 100%;
+      margin: .45rem;
     }
   }
 }
+
+@media (max-width: 770px) {
+  .mosaic {
+    .col {
+      width: 100% !important;
+    }
+  }
+}
+
+/*
+@media (max-width: 575px) {
+  .latest-container {
+    float: none !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block !important;
+    max-width: none;
+    text-align: center;
+  }
+}
+*/

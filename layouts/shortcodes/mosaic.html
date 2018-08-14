@@ -1,0 +1,89 @@
+{{ $format := .Get 0 }}
+{{ $images :=  after 1 .Params }}
+{{ $resources :=  .Page.Resources }}
+
+
+{{ if eq $format "3x1" }}
+
+  {{ $left := first 3 $images }}
+  {{ $main := index $images 3 }}
+
+  {{ $main_original := $resources.GetMatch (printf "*%s*" $main) }}
+  {{ $main_image    := $main_original.Resize "525x" }}
+
+  {{ $height := sub (div $main_image.Height 3) 14 }}
+
+  <div class="mosaic">
+    <div class="col small">
+
+      {{range $left}}
+
+        {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
+        {{ $image := ($original.Resize (printf "156x%v center" $height)) }}
+
+        {{ with (dict "Original" $original "Image" $image) }}
+          <figure class="frame">
+            <a href="{{ .Original.RelPermalink }}" class="image-link">
+              <img srcset="{{ .Image.RelPermalink }} {{ .Image.Width }}w, {{ .Original.RelPermalink }}, {{ .Original.Width }}w"
+                   sizes="(max-width: {{ .Image.Width }}) {{ .Image.Width }}px,"
+                   width="{{ .Image.Width }}"
+                   height="{{ .Image.Height }}">
+            </a>
+          </figure>
+        {{ end }}
+
+
+      {{ end }}
+
+    </div>
+    <div class="col">
+
+      {{ $original := $resources.GetMatch (printf "*%s*" $main) }}
+      {{ $image := ($original.Resize "525x") }}
+      {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+    </div>
+  </div>
+
+{{ else if eq $format "1x3"  }}
+
+  {{ $main :=  index $images 0 }}
+  {{ $right := after 1 $images }}
+
+  {{ $main_original := $resources.GetMatch (printf "*%s*" $main) }}
+  {{ $main_image    := $main_original.Resize "525x" }}
+
+  {{ $height := sub (div $main_image.Height 3) 14 }}
+
+  <div class="mosaic">
+    <div class="col">
+
+      {{ $original := $resources.GetMatch (printf "*%s*" $main) }}
+      {{ $image := ($original.Resize "525x") }}
+      {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+    </div>
+    <div class="col small">
+
+      {{range $right}}
+
+        {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
+        {{ $image := ($original.Resize (printf "156x%v center" $height)) }}
+
+        {{ with (dict "Original" $original "Image" $image) }}
+          <figure class="frame">
+            <a href="{{ .Original.RelPermalink }}" class="image-link">
+              <img srcset="{{ .Image.RelPermalink }} {{ .Image.Width }}w, {{ .Original.RelPermalink }}, {{ .Original.Width }}w"
+                   sizes="(max-width: {{ .Image.Width }}) {{ .Image.Width }}px,"
+                   width="{{ .Image.Width }}"
+                   height="{{ .Image.Height }}">
+            </a>
+          </figure>
+        {{ end }}
+
+      {{ end }}
+
+    </div>
+  </div>
+
+{{ end }}

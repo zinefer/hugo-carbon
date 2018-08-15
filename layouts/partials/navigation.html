@@ -1,5 +1,13 @@
-<div id="topbar">
-  <h1 class="headline center m-0"><a href="{{ .Site.BaseURL }}">{{ $.Site.Title }}</a></h1>
+<div id="topbar" class="closed">
+  <a href="{{ .Site.BaseURL }}" class="headline">{{ $.Site.Title }}</a>
+  <a href="javascript:void(0);" onClick="openMenu()" class="icon"><span class="icon-bars"></span></a>
+  <a href="{{ .Site.BaseURL }}">Home</a>
+  <a href="{{ "/categories" | absURL }}">Categories</a>
+  <a href="{{ "/posts" | absURL }}">Posts</a>
+  <a href="{{ "/projects" | absURL }}">Projects</a>
+  <hr>
+  <a href="mailto:zinefer@gmail.com"><span class="icon-send"></span>Email Me</a>
+  <a href="https://github.com/zinefer"><span class="icon-github"></span> Github</a>
 </div>
 <div id="sidebar">
   {{ if $.Site.Params.portrait }}

@@ -23,3 +23,9 @@ function openMenu() {
     x.className = "closed";
   }
 }
+
+// Just a little less animation ...
+if((document.referrer.split('/')[2]).split(':')[0] == location.hostname){
+  var x = document.getElementById("portrait");
+  x = x.className = "frame";
+}

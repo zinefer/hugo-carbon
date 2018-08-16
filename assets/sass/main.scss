@@ -277,6 +277,10 @@ video {
   background-color: $dark-color;
   display:inline-block;
 
+  img {
+    object-fit: cover;
+  }
+
   img, div {
     border-radius: 0.3rem;
   }

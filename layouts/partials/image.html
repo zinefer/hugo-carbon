@@ -1,6 +1,13 @@
-<figure class="frame {{ .Float }}">
+<figure class="frame {{ .Class }}">
   <a href="{{ .Original.RelPermalink }}" class="image-link">
-    <img src="{{ .Image.RelPermalink }}" width="{{ .Image.Width }}" height="{{ .Image.Height }}">
+    <img src="{{ .Image.RelPermalink }}" width="{{ .Image.Width }}" height="{{ .Image.Height }}"
+      srcset="{{ .Original.RelPermalink }} {{ .Original.Width }}w,
+        {{ if gt .Original.Width 960 }}
+          {{ $medium := .Original.Resize "960x" }}
+          {{ $medium.RelPermalink }} {{ $medium.Width }}w,
+        {{ end }}
+        {{ .Image.RelPermalink }} {{ .Image.Width }}w"
+        sizes="(max-width: 770px) 100vw, {{ .Image.Width }}px">
   </a>
   {{ with .Caption }}
     <figcaption><small>{{ . }}</small></figcaption>

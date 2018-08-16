@@ -11,6 +11,6 @@
 {{ .Scratch.Set "image" $original }}
 {{ end }}
 {{ $image := .Scratch.Get "image" }}
-{{ $float := .Get 3 }}
+{{ $class := .Get 3 }}
 
-{{ partial "image.html" (dict "Original" $original "Image" $image "Float" $float "Caption" .Inner) }}
+{{ partial "image.html" (dict "Original" $original "Image" $image "Class" $class "Caption" .Inner) }}

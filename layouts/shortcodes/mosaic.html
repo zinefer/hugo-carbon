@@ -19,19 +19,8 @@
       {{range $left}}
 
         {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
-        {{ $image := ($original.Resize (printf "156x%v center" $height)) }}
-
-        {{ with (dict "Original" $original "Image" $image) }}
-          <figure class="frame">
-            <a href="{{ .Original.RelPermalink }}" class="image-link">
-              <img srcset="{{ .Image.RelPermalink }} {{ .Image.Width }}w, {{ .Original.RelPermalink }}, {{ .Original.Width }}w"
-                   sizes="(max-width: {{ .Image.Width }}) {{ .Image.Width }}px,"
-                   width="{{ .Image.Width }}"
-                   height="{{ .Image.Height }}">
-            </a>
-          </figure>
-        {{ end }}
-
+        {{ $image    := ($original.Fill (printf "156x%v center" $height)) }}
+        {{ partial "image.html" (dict "Original" $original "Image" $image) }}
 
       {{ end }}
 
@@ -68,18 +57,8 @@
       {{range $right}}
 
         {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
-        {{ $image := ($original.Resize (printf "156x%v center" $height)) }}
-
-        {{ with (dict "Original" $original "Image" $image) }}
-          <figure class="frame">
-            <a href="{{ .Original.RelPermalink }}" class="image-link">
-              <img srcset="{{ .Image.RelPermalink }} {{ .Image.Width }}w, {{ .Original.RelPermalink }}, {{ .Original.Width }}w"
-                   sizes="(max-width: {{ .Image.Width }}) {{ .Image.Width }}px,"
-                   width="{{ .Image.Width }}"
-                   height="{{ .Image.Height }}">
-            </a>
-          </figure>
-        {{ end }}
+        {{ $image := ($original.Fill (printf "156x%v center" $height)) }}
+        {{ partial "image.html" (dict "Original" $original "Image" $image) }}
 
       {{ end }}
 

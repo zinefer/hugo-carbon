@@ -333,6 +333,12 @@ img {
     border-radius: 0.25em;
     padding-left: 0;
 
+    a, span {
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.6em 0.8em;
+    }
+
     li {
       display: inline-block;
       border-right: solid 1px $dark-border-color;
@@ -350,12 +356,6 @@ img {
   }
 
   .page-item {
-    a {
-      text-decoration: none;
-      display: inline-block;
-      padding: 0.6em 0.8em;
-    }
-
     &:hover {
       background-color: $dark-border-color;
     }
@@ -387,6 +387,7 @@ img {
           transform: translateY(0);
         }
       }
+
       i {
         display: block;
         height: 100%;

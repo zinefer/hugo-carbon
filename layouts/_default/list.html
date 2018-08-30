@@ -10,21 +10,6 @@
         <ul id="list">
           {{ range .Paginator.Pages }}
 
-            <!--
-            {{ with index (.Resources.ByType "image") 0 }}
-              {{ $image := (.Fill "700x200 center").RelPermalink }}
-              <li class="p-0 m-b-2" style="background-image: url('{{ $image }}'); width: 700px; height: 200px;">
-                <div class="cubic-bezier">
-                  <h3 class="m-0"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                </div>
-              </li>
-            {{ end }}
-            -->
-
-
-
-
-
             <li>
               <div class="thumb">
                 {{ partial "thumbnail.html" . }}

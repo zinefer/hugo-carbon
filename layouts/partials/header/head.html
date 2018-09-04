@@ -6,8 +6,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>{{ $.Site.Title }}</title>
-  <meta name="description" content="{{ .Description | default .Site.Params.SiteDescription }}">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <meta content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}" property="og:title">
+  <meta content="{{ .Site.Params.description }}{{ if not .IsHome }} - {{ .Description }}{{ end }}" property="og:description">
+  {{ partial "seo_schema" . }}
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="{{ $.Site.Params.themecolor }}">
@@ -30,7 +33,7 @@
 
   <link rel="stylesheet" href={{ "css/magnific-popup.css" | absURL }}>
 
-  {{ partialCached "header/custom-head.html" . }}
+  {{ partial "header/custom-head.html" . }}
 </head>
 <body>
 <!--[if lt IE 8]>

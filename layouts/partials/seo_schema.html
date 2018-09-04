@@ -1,0 +1,27 @@
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Site.BaseURL }}"
+  },
+  "articleSection" : "{{ .Section }}",
+  "name" : "{{ .Title }}",
+  "headline" : "{{ .Title }}",
+  "description" : "{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}",
+  "inLanguage" : "en-US",
+  "author" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
+  "creator" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
+  "publisher": { "@type": "Organization", "name": "{{ index .Site.Params.Publisher }}", "logo": {"@type": "ImageObject", "url": "https://google.com/logo.jpg", "width": 60, "height": 60 } },
+  "accountablePerson" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
+  "copyrightHolder" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
+  "copyrightYear" : "{{ .Date.Format "2006" }}",
+  {{ with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}"image": "{{ .Permalink }}",{{ end }}
+  "datePublished": "{{ .Date }}",
+  "dateModified" : "{{ .Date }}",
+  "url" : "{{ .Permalink }}",
+  "wordCount" : "{{ .WordCount }}",
+  "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }}"Blog" ]
+}
+</script>

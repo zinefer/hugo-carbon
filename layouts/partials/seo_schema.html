@@ -1,27 +1,51 @@
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ .Site.BaseURL }}"
-  },
-  "articleSection" : "{{ .Section }}",
-  "name" : "{{ .Title }}",
-  "headline" : "{{ .Title }}",
-  "description" : "{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}",
-  "inLanguage" : "en-US",
-  "author" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
-  "creator" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
-  "publisher": { "@type": "Organization", "name": "{{ index .Site.Params.Publisher }}", "logo": {"@type": "ImageObject", "url": "https://google.com/logo.jpg", "width": 60, "height": 60 } },
-  "accountablePerson" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
-  "copyrightHolder" : {{ range .Site.Params.Author }} { "@type": "Person", "name": "{{ . }}" } {{ end }},
-  "copyrightYear" : "{{ .Date.Format "2006" }}",
-  {{ with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}"image": "{{ .Permalink }}",{{ end }}
-  "datePublished": "{{ .Date }}",
-  "dateModified" : "{{ .Date }}",
-  "url" : "{{ .Permalink }}",
-  "wordCount" : "{{ .WordCount }}",
-  "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }}"Blog" ]
-}
-</script>
+{{- $title := .Site.Title }}
+{{- if not .IsHome }}
+  {{- $title = .Title }}
+{{- end }}
+
+{{- $author := dict "@type" "Person" "name" .Site.Params.Author }}
+
+{{- $logo := dict "@type" "ImageObject" "url" .Site.Params.PublisherLogo "width" 60 "height" 60 }}
+{{- $publisher := dict "@type" "Organization" "name" .Site.Params.Publisher "logo" $logo }}
+
+{{- with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}
+  {{- $image := .Permalink }}
+{{- end }}
+
+{{- $keywords := slice "Blog" }}
+{{- if isset .Params "tags" }}
+  {{- $keywords = union .Params.tags $keywords }}
+{{- end }}
+
+{{- $scratch := newScratch }}
+{{- $scratch.SetInMap "seo" "@context"       "http://schema.org" }}
+{{- $scratch.SetInMap "seo" "@type"          "BlogPosting" }}
+{{- $scratch.SetInMap "seo" "articleSection" .Section }}
+
+{{- $scratch.SetInMap "seo" "name"     $title }}
+{{- $scratch.SetInMap "seo" "headline" $title }}
+
+{{- $scratch.SetInMap "seo" "description" (.Description | default .Site.Params.Description) }}
+{{- $scratch.SetInMap "seo" "inLanguage"  .Site.LanguageCode }}
+
+{{- $scratch.SetInMap "seo" "author"  $author }}
+{{- $scratch.SetInMap "seo" "creator" $author }}
+{{- $scratch.SetInMap "seo" "accountablePerson" $author }}
+{{- $scratch.SetInMap "seo" "copyrightHolder"   $author }}
+
+{{- $scratch.SetInMap "seo" "datePublished" .Date }}
+{{- $scratch.SetInMap "seo" "dateModified"  .Date }}
+{{- $scratch.SetInMap "seo" "copyrightYear" (.Date.Format "2006") }}
+
+{{- $scratch.SetInMap "seo" "publisher" $publisher }}
+
+{{- with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}
+  {{- $scratch.SetInMap "seo" "image" .Permalink }}
+{{- end }}
+
+{{- $scratch.SetInMap "seo" "url" .Permalink }}
+
+{{- $scratch.SetInMap "seo" "wordCount" .WordCount }}
+{{- $scratch.SetInMap "seo" "keywords"  $keywords }}
+
+<script type="application/ld+json">{{ $scratch.Get "seo" | jsonify }}</script>

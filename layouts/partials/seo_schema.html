@@ -18,9 +18,10 @@
 {{- end }}
 
 {{- $scratch := newScratch }}
-{{- $scratch.SetInMap "seo" "@context"       "http://schema.org" }}
-{{- $scratch.SetInMap "seo" "@type"          "BlogPosting" }}
-{{- $scratch.SetInMap "seo" "articleSection" .Section }}
+{{- $scratch.SetInMap "seo" "@context" "http://schema.org" }}
+{{- $scratch.SetInMap "seo" "@type"    "BlogPosting" }}
+{{- $scratch.SetInMap "seo" "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Site.BaseURL) }}
+{{- $scratch.SetInMap "seo" "articleSection"   .Section }}
 
 {{- $scratch.SetInMap "seo" "name"     $title }}
 {{- $scratch.SetInMap "seo" "headline" $title }}

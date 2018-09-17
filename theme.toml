@@ -8,7 +8,7 @@ description = ""
 homepage = "https://github.com/zinefer/hugo-carbon"
 tags = []
 features = []
-min_version = "0.41"
+min_version = "0.48"
 
 [author]
   name = "James Kiefer"

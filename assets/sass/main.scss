@@ -23,10 +23,13 @@ a {
 code {
   font-family: 'Source Code Pro', monospace;
   padding: 5px;
-  display: block;
   background-color: $dark-background-secondary;
   overflow-x: scroll;
   font-size: 0.9em;
+}
+
+pre > code {
+  display: block;
 }
 
 video {

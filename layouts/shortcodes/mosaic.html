@@ -65,4 +65,66 @@
     </div>
   </div>
 
+{{ else if eq $format "2x1"  }}
+
+  {{ $left := first 2 $images }}
+  {{ $main := index $images 2 }}
+
+  {{ $main_original := $resources.GetMatch (printf "*%s*" $main) }}
+  {{ $main_image    := $main_original.Resize "525x" }}
+
+  {{ $height := sub (div $main_image.Height 2) 12 }}
+
+  <div class="mosaic">
+    <div class="col small">
+
+      {{range $left}}
+
+        {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
+        {{ $image    := ($original.Fill (printf "156x%v center" $height)) }}
+        {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+      {{ end }}
+
+    </div>
+    <div class="col">
+
+      {{ $original := $resources.GetMatch (printf "*%s*" $main) }}
+      {{ $image := ($original.Resize "525x") }}
+      {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+    </div>
+  </div>
+
+{{ else if eq $format "1x2"  }}
+
+  {{ $main :=  index $images 0 }}
+  {{ $right := after 1 $images }}
+
+  {{ $main_original := $resources.GetMatch (printf "*%s*" $main) }}
+  {{ $main_image    := $main_original.Resize "525x" }}
+
+  {{ $height := sub (div $main_image.Height 2) 12 }}
+
+  <div class="mosaic">
+    <div class="col">
+
+      {{ $original := $resources.GetMatch (printf "*%s*" $main) }}
+      {{ $image := ($original.Resize "525x") }}
+      {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+    </div>
+    <div class="col small">
+
+      {{range $right}}
+
+        {{ $original := $resources.GetMatch (printf "*%s*" (.)) }}
+        {{ $image := ($original.Fill (printf "156x%v center" $height)) }}
+        {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+
+      {{ end }}
+
+    </div>
+  </div>
+
 {{ end }}

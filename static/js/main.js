@@ -25,7 +25,7 @@ function openMenu() {
 }
 
 // Just a little less animation ...
-if((document.referrer.split('/')[2]).split(':')[0] == location.hostname){
+if(document.referrer && (document.referrer.split('/')[2]).split(':')[0] == location.hostname){
   var x = document.getElementById("portrait");
   x = x.className = "frame";
 }

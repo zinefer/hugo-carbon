@@ -36,6 +36,13 @@ video {
   max-width: 700px;
 }
 
+canvas.retrogame {
+  cursor: none;
+  width: 65%;
+  background-color: black;
+  border-radius: 25px;
+}
+
 
 #container {
   margin: 0 auto;

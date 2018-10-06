@@ -33,6 +33,9 @@
 
   {{- partial "header/custom-head.html" . }}
   {{- partial "seo_schema" . }}
+
+  <!-- Google Analytics -->
+  {{ partialCached "header/analytics.html" . }}
 </head>
 <body>
 <!--[if lt IE 8]>

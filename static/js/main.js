@@ -24,6 +24,16 @@ function openMenu() {
   }
 }
 
+function replyTo(parent, name) {
+  var e = document.getElementById(parent),
+      f = document.getElementById('comment-form'),
+      h = document.getElementById('comment-form-header');
+
+  h.innerHTML = 'Reply to ' + name;
+  e.parentNode.insertBefore(f, e.nextSibling);
+  document.getElementsByName('fields[reply_to]')[0].value=parent;
+}
+
 // Just a little less animation ...
 if(document.referrer && (document.referrer.split('/')[2]).split(':')[0] == location.hostname){
   var x = document.getElementById("portrait");

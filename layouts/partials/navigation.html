@@ -22,6 +22,8 @@
   <h1 class="headline center"><a href="{{ .Site.BaseURL }}">{{ $.Site.Title }}</a></h1>
   <p class="center">{{ $.Site.Params.description }}</p>
 
+  {{- partial "custom-tagline.html" . }}
+
   <div class="social">
     <a href="mailto:zinefer@gmail.com"><span class="icon-send"></span> Email</a>
     <a href="https://github.com/zinefer"><span class="icon-github"></span> Github</a>

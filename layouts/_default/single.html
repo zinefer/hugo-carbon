@@ -14,7 +14,13 @@
         </small>
       </p>
 
-      {{ .Content }}
+      <div class="article">
+        {{ .Content }}
+      </div>
+
+      <br/><br/>
+
+      {{ partial "staticman/comments" . }}
 
       {{ partialCached "footer/content-foot.html" . }}
     </div>

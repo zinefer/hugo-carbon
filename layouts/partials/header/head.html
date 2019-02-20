@@ -24,6 +24,8 @@
 
   <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
 
+  <link rel="stylesheet" href={{ "css/normalize.min.css" | absURL }}>
+
   {{- $style := resources.Get "sass/main.scss" | toCSS | postCSS | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}">
 

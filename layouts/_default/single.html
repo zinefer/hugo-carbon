@@ -2,28 +2,28 @@
 
 {{ partialCached "navigation.html" . }}
 
-  <div id="container">
-    <div id="content">
-      <h1 class="animated flipInX m-b-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-      <p class="post-info animated fadeIn m-t-1">
-        <i>in {{ partial "category.html" .Params.Categories }} on {{ .Lastmod.Format "January 2, 2006" }}</i> |
-        <small>
-          {{ range .Params.tags }}
-            {{ partial "tag.html" . }}
-          {{ end }}
-        </small>
-      </p>
+<main id="container">
+  <div id="content">
+    <article>
+      <header>
+        <h1 class="animated flipInX m-b-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+        <p class="post-info animated fadeIn m-t-1">
+          <i>in {{ partial "category.html" .Params.Categories }} on {{ .Lastmod.Format "January 2, 2006" }}</i> |
+          <small>
+            {{ range .Params.tags }}
+              {{ partial "tag.html" . }}
+            {{ end }}
+          </small>
+        </p>
+      </header>
 
-      <div class="article">
-        {{ .Content }}
-      </div>
-
-      <br/><br/>
+      {{ .Content }}
 
       {{ partial "staticman/comments" . }}
+    </article>
 
-      {{ partialCached "footer/content-foot.html" . }}
-    </div>
+    {{ partialCached "footer/content-foot.html" . }}
   </div>
+</main>
 
 {{ partial "footer/foot.html" . }}

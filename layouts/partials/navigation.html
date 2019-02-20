@@ -1,4 +1,4 @@
-<div id="topbar" class="closed">
+<nav id="topbar" class="closed">
   <a href="{{ .Site.BaseURL }}" class="headline">{{ $.Site.Title }}</a>
   <a href="javascript:void(0);" onClick="openMenu()" class="icon"><span class="icon-bars"></span></a>
   <a href="{{ .Site.BaseURL }}">Home</a>
@@ -8,8 +8,8 @@
   <hr>
   <a href="mailto:zinefer@gmail.com"><span class="icon-send"></span>Email Me</a>
   <a href="https://github.com/zinefer"><span class="icon-github"></span> Github</a>
-</div>
-<div id="sidebar">
+</nav>
+<nav id="sidebar">
   {{ if $.Site.Params.portrait }}
   <figure id="portrait" class="frame animated flipInY">
     {{ $portrait := (resources.Get "img/portrait.jpg").Resize "300x" }}
@@ -57,4 +57,4 @@
       </li>
     {{ end }}
   </ul>
-</div>
+</nav>

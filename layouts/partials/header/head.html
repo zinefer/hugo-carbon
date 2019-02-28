@@ -29,6 +29,7 @@
   {{- $style := resources.Get "sass/main.scss" | toCSS | postCSS | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}">
 
+  <link rel="stylesheet" href={{ "css/syntax.css" | absURL }}>
   <link rel="stylesheet" href={{ "icons/style.css" | absURL }}>
   <link rel="stylesheet" href={{ "css/magnific-popup.css" | absURL }}>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">

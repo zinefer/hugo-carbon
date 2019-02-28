@@ -32,6 +32,9 @@ pre > code {
   display: block;
 }
 
+/* chroma highlight */
+.chroma .hl { display: block; width: 100%;background-color: $dark-border-color }
+
 blockquote
 {
     font-family: 'Source Code Pro', monospace;

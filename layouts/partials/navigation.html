@@ -14,7 +14,7 @@
   <figure id="portrait" class="frame animated flipInY">
     {{ $portrait := (resources.Get "img/portrait.jpg").Resize "300x" }}
     <a href="{{ $.Site.Params.portrait | absURL }}" class="image-link">
-      <img class="logo" src="{{ $portrait.RelPermalink }}"/>
+      <img class="logo" src="{{ $portrait.RelPermalink }}" alt="{{ $.Site.Title }}"/>
     </a>
   </figure>
   {{ end }}

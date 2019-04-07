@@ -251,6 +251,23 @@ canvas.retrogame {
   text-decoration: none;
 }
 
+/* Tables */
+
+#content table {
+  thead {
+    tr {
+      font-size: 1.1em;
+    }
+  }
+  tbody {
+    td {
+      padding-right: 0.75em;
+    }
+    td:last-child {
+      padding-right: 0;
+    }
+  }
+}
 
 /* Lists */
 

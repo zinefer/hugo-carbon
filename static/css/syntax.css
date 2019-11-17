@@ -1,12 +1,12 @@
-/* Generated with `hugo gen chromastyles --style=monokai > static/css/syntax.css`
+/* Generated with `hugo gen chromastyles --style=monokai --highlightStyle=bg:#555 > static/css/syntax.css`
 
 /* Background */ .chroma { color: #f8f8f2; background-color: #272822 }
 /* Error */ .chroma .err { color: #960050; background-color: #1e0010 }
 /* LineTableTD */ .chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
 /* LineTable */ .chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; width: auto; overflow: auto; display: block; }
-/* LineHighlight */ /*.chroma .hl { display: block; width: 100%;background-color: #ffffcc }*/
-/* LineNumbersTable */ .chroma .lnt { margin-right: 0.4em; padding: 0 0.4em 0 0.4em; }
-/* LineNumbers */ .chroma .ln { margin-right: 0.4em; padding: 0 0.4em 0 0.4em; }
+/* LineHighlight */ .chroma .hl { display: block; width: 100%;background-color: #555555 }
+/* LineNumbersTable */ .chroma .lnt { margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #7f7f7f }
+/* LineNumbers */ .chroma .ln { margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #7f7f7f }
 /* Keyword */ .chroma .k { color: #66d9ef }
 /* KeywordConstant */ .chroma .kc { color: #66d9ef }
 /* KeywordDeclaration */ .chroma .kd { color: #66d9ef }

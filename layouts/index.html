@@ -8,13 +8,14 @@
       <!-- <h1 class="animated flipInX"><a href="/">{{ $.Site.Title }}</a></h1> -->
 
       <!-- Most Recent Project -->
-      {{ $sectiona := where .Site.Pages "Section" "posts" }}
-      {{ $sectionb := where .Site.Pages "Section" "projects" }}
+      {{ $sectiona := where .Site.RegularPages "Section" "posts" }}
+      {{ $sectionb := where .Site.RegularPages "Section" "projects" }}
 
       {{ $articlea := index $sectiona 0 }}
       {{ $articleb := index $sectionb 0 }}
 
       <div>
+
         {{ with or (index ($articlea.Resources.Match "thumb.*") 0) (index ($articlea.Resources.ByType "image") 0) }}
 
           {{ $image := (.Fill "475x275 center") }}

@@ -5,10 +5,14 @@
 
 {{- $author := dict "@type" "Person" "name" .Site.Params.Author }}
 
-{{- $keywords := slice "Blog" }}
+{{- $keywords := slice $author "Blog" }}
 {{- if isset .Params "tags" }}
   {{- $keywords = union .Params.tags $keywords }}
 {{- end }}
+{{- if isset .Site.Params "tags" }}
+  {{- $keywords = union .Site.Params.tags $keywords }}
+{{- end }}
+{{- $keywords = $keywords | uniq }}
 
 <script type="application/ld+json">
 {

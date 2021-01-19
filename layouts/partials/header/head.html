@@ -10,7 +10,19 @@
 
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
   <meta content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}" property="og:title">
-  <meta content="{{ .Site.Params.description }}{{ if not .IsHome }} - {{ .Description }}{{ end }}" property="og:description">
+  
+  {{ if .IsHome }}
+    
+    <meta content="{{ .Site.Params.seoDescription }}" property="og:description">
+  
+  {{ else }}
+
+    <meta content="{{ .Description }}" property="og:description">
+    {{ with or (index (.Resources.Match "thumb.*") 0) (index (.Resources.ByType "image") 0) }}
+      <meta content="{{ .Permalink }}" property="og:image">
+    {{ end }}
+
+  {{ end }}
 
   <meta name="theme-color" content="{{ $.Site.Params.themecolor }}">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">

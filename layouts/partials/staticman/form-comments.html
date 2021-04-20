@@ -22,7 +22,7 @@
     <input type="hidden" name="options[origin]" value="{{ .Permalink }}">
     <input type="hidden" name="options[parent]" value="{{ .File.ContentBaseName }}">
     <input type="hidden" name="fields[reply_to]" value="">
-    <input type="address" name="fields[botpot]" placeholder="botpot (do not fill!)" style="display:none">
+    <input type="address" name="fields[captcha]" placeholder="botpot (do not fill!)" style="display:none">
     {{ if isset .Site.Params.staticman "recaptcha" }}
     <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ .Site.Params.recaptcha.siteKey }}">
     <input type="hidden" name="options[reCaptcha][secret]" value="{{ .Site.Params.recaptcha.secret }}">

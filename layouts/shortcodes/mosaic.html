@@ -4,8 +4,8 @@
   1x3
   2x1
   1x2
-  1x1 (325x 325x)
-
+  1x1   (325xmin 325xmin)
+  1x1x1 (225xmin 225xmin)
 -->
 
 {{ $format := .Get 0 }}
@@ -147,17 +147,19 @@
   {{ $left_image := "null" }}
   {{ $right_image := "null" }}
 
-  {{ if gt $left_original.Height $right_original.Height }}
+  {{ $min_height := math.Min $left_original.Height $right_original.Height }}
+
+  {{ if eq $left_original.Height $min_height }}
     
-    {{ $right_image = $right_original.Resize "325x" }}
-    {{ $height := $right_image.Height }}
-    {{ $left_image = $left_original.Fit (printf "325x%v center" $height) }}
-
-  {{ else }}
-
     {{ $left_image = $left_original.Resize "325x" }}
     {{ $height := $left_image.Height }}
     {{ $right_image = $right_original.Fit (printf "325x%v center" $height) }}
+
+  {{ else }}
+
+    {{ $right_image = $right_original.Resize "325x" }}
+    {{ $height := $right_image.Height }}
+    {{ $left_image = $left_original.Fit (printf "325x%v center" $height) }}
 
   {{ end }}
 
@@ -166,6 +168,63 @@
       
       {{ partial "image.html" (dict "Original" $left_original "Image" $left_image) }}
       
+    </div>
+    <div class="col">
+
+      {{ partial "image.html" (dict "Original" $right_original "Image" $right_image) }}
+
+    </div>
+  </div>
+
+{{ else if eq $format "1x1x1"  }}
+
+  {{ $left := index $images 0 }}
+  {{ $middle := index $images 1 }}
+  {{ $right := index $images 2 }}
+
+  {{ $left_original := $resources.GetMatch (printf "*%s*" $left) }}
+  {{ $middle_original := $resources.GetMatch (printf "*%s*" $middle) }}
+  {{ $right_original := $resources.GetMatch (printf "*%s*" $right) }}
+
+  {{ $left_image := "null" }}
+  {{ $middle_image := "null" }}
+  {{ $right_image := "null" }}
+
+  {{ $min_height := (math.Min $left_original.Height (math.Min $middle_original.Height $right_original.Height)) }}
+
+  {{ if eq $left_original.Height $min_height }}
+
+    {{ $left_image = $left_original.Resize "225x" }}
+    {{ $height := $left_image.Height }}
+    {{ $middle_image = $middle_original.Fit (printf "225x%v center" $height) }}
+    {{ $right_image = $right_original.Fit (printf "225x%v center" $height) }}
+
+  {{ else if eq $middle_original.Height $min_height }}
+
+    {{ $middle_image = $middle_original.Resize "225x" }}
+    {{ $height := $middle_image.Height }}
+    {{ $left_image = $left_original.Fit (printf "225x%v center" $height) }}
+    {{ $right_image = $right_original.Fit (printf "225x%v center" $height) }}
+
+  {{ else }}
+
+    {{ $right_image = $right_original.Resize "225x" }}
+    {{ $height := $right_image.Height }}
+    {{ $left_image = $left_original.Fit (printf "225x%v center" $height) }}
+    {{ $middle_image = $middle_original.Fit (printf "225x%v center" $height) }}
+
+  {{ end }}
+
+  <div class="mosaic">
+    <div class="col">
+      
+      {{ partial "image.html" (dict "Original" $left_original "Image" $left_image) }}
+      
+    </div>
+    <div class="col">
+
+      {{ partial "image.html" (dict "Original" $middle_original "Image" $middle_image) }}
+
     </div>
     <div class="col">
 

@@ -32,6 +32,11 @@ pre > code {
   display: block;
 }
 
+li > code {
+  padding: 2px;
+  line-height: 1.75em;
+}
+
 /* chroma highlight */
 .chroma .hl { display: block; width: 100%;background-color: $dark-border-color }
 

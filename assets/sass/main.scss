@@ -26,15 +26,16 @@ code {
   background-color: $dark-background-secondary;
   overflow-x: auto;
   font-size: 0.9em;
+  line-height: 1.75em;
 }
 
 pre > code {
   display: block;
+  line-height: normal;
 }
 
 li > code {
   padding: 2px;
-  line-height: 1.75em;
 }
 
 /* chroma highlight */

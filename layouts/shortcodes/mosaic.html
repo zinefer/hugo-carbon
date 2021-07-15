@@ -1,7 +1,16 @@
+<!--
+
+  3x1
+  1x3
+  2x1
+  1x2
+  1x1 (325x 325x)
+
+-->
+
 {{ $format := .Get 0 }}
 {{ $images :=  after 1 .Params }}
 {{ $resources :=  .Page.Resources }}
-
 
 {{ if eq $format "3x1" }}
 
@@ -123,6 +132,44 @@
         {{ partial "image.html" (dict "Original" $original "Image" $image) }}
 
       {{ end }}
+
+    </div>
+  </div>
+
+{{ else if eq $format "1x1"  }}
+
+  {{ $left := index $images 0 }}
+  {{ $right := index $images 1 }}
+
+  {{ $left_original := $resources.GetMatch (printf "*%s*" $left) }}
+  {{ $right_original := $resources.GetMatch (printf "*%s*" $right) }}
+
+  {{ $left_image := "null" }}
+  {{ $right_image := "null" }}
+
+  {{ if gt $left_original.Height $right_original.Height }}
+    
+    {{ $right_image = $right_original.Resize "325x" }}
+    {{ $height := $right_image.Height }}
+    {{ $left_image = $left_original.Fit (printf "325x%v center" $height) }}
+
+  {{ else }}
+
+    {{ $left_image = $left_original.Resize "325x" }}
+    {{ $height := $left_image.Height }}
+    {{ $right_image = $right_original.Fit (printf "325x%v center" $height) }}
+
+  {{ end }}
+
+  <div class="mosaic">
+    <div class="col">
+      
+      {{ partial "image.html" (dict "Original" $left_original "Image" $left_image) }}
+      
+    </div>
+    <div class="col">
+
+      {{ partial "image.html" (dict "Original" $right_original "Image" $right_image) }}
 
     </div>
   </div>

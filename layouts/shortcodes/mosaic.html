@@ -153,13 +153,13 @@
     
     {{ $left_image = $left_original.Resize "325x" }}
     {{ $height := $left_image.Height }}
-    {{ $right_image = $right_original.Fit (printf "325x%v center" $height) }}
+    {{ $right_image = $right_original.Fill (printf "325x%v center" $height) }}
 
   {{ else }}
 
     {{ $right_image = $right_original.Resize "325x" }}
     {{ $height := $right_image.Height }}
-    {{ $left_image = $left_original.Fit (printf "325x%v center" $height) }}
+    {{ $left_image = $left_original.Fill (printf "325x%v center" $height) }}
 
   {{ end }}
 
@@ -196,22 +196,22 @@
 
     {{ $left_image = $left_original.Resize "225x" }}
     {{ $height := $left_image.Height }}
-    {{ $middle_image = $middle_original.Fit (printf "225x%v center" $height) }}
-    {{ $right_image = $right_original.Fit (printf "225x%v center" $height) }}
+    {{ $middle_image = $middle_original.Fill (printf "225x%v center" $height) }}
+    {{ $right_image = $right_original.Fill (printf "225x%v center" $height) }}
 
   {{ else if eq $middle_original.Height $min_height }}
 
     {{ $middle_image = $middle_original.Resize "225x" }}
     {{ $height := $middle_image.Height }}
-    {{ $left_image = $left_original.Fit (printf "225x%v center" $height) }}
-    {{ $right_image = $right_original.Fit (printf "225x%v center" $height) }}
+    {{ $left_image = $left_original.Fill (printf "225x%v center" $height) }}
+    {{ $right_image = $right_original.Fill (printf "225x%v center" $height) }}
 
   {{ else }}
 
     {{ $right_image = $right_original.Resize "225x" }}
     {{ $height := $right_image.Height }}
-    {{ $left_image = $left_original.Fit (printf "225x%v center" $height) }}
-    {{ $middle_image = $middle_original.Fit (printf "225x%v center" $height) }}
+    {{ $left_image = $left_original.Fill (printf "225x%v center" $height) }}
+    {{ $middle_image = $middle_original.Fill (printf "225x%v center" $height) }}
 
   {{ end }}
 

@@ -1,5 +1,4 @@
 <!--
-
   3x1
   1x3
   2x1
@@ -8,9 +7,31 @@
   1x1x1 (225xmin 225xmin)
 -->
 
-{{ $format := .Get 0 }}
+{{ $opts := .Get 0 }}
 {{ $images :=  after 1 .Params }}
 {{ $resources :=  .Page.Resources }}
+
+{{ $opts = split $opts "|" }}
+
+{{ $format := index $opts 0 }}
+
+{{ $opt_height := false }}
+{{ $opt_width := false }}
+
+{{ if eq $format "1x1" }}
+  {{ $opt_height = "" }}
+  {{ $opt_width = 325 }}
+{{ else if eq $format "1x1x1" }}
+  {{ $format = "1x1" }}
+  {{ $opt_height = "" }}
+  {{ $opt_width = 225 }}
+{{ end }}
+
+{{ if isset $opts 1 }}
+  {{ $size := split (index $opts 1) "x" }}
+  {{ $opt_width = index $size 0 | default $opt_width }}
+  {{ $opt_height = index $size 1 | default $opt_height }}
+{{ end }}
 
 {{ if eq $format "3x1" }}
 
@@ -138,99 +159,42 @@
 
 {{ else if eq $format "1x1"  }}
 
-  {{ $left := index $images 0 }}
-  {{ $right := index $images 1 }}
+  {{ $shortest := false }}
+  {{ $originals := slice }}
+  {{ range $index, $image := $images }}
+    {{ $original := $resources.GetMatch (printf "*%s*" $image) }}
+    {{ $originals = $originals | append $original }}
 
-  {{ $left_original := $resources.GetMatch (printf "*%s*" $left) }}
-  {{ $right_original := $resources.GetMatch (printf "*%s*" $right) }}
-
-  {{ $left_image := "null" }}
-  {{ $right_image := "null" }}
-
-  {{ $min_height := math.Min $left_original.Height $right_original.Height }}
-
-  {{ if eq $left_original.Height $min_height }}
-    
-    {{ $left_image = $left_original.Resize "325x" }}
-    {{ $height := $left_image.Height }}
-    {{ $right_image = $right_original.Fill (printf "325x%v center" $height) }}
-
-  {{ else }}
-
-    {{ $right_image = $right_original.Resize "325x" }}
-    {{ $height := $right_image.Height }}
-    {{ $left_image = $left_original.Fill (printf "325x%v center" $height) }}
-
+    {{ if eq $shortest false }}
+      {{ $shortest = $index }}
+    {{ else if gt (index $originals $shortest).Height $original.Height }}
+      {{ $shortest = $index }}
+    {{ end }}
   {{ end }}
 
-  <div class="mosaic">
-    <div class="col">
-      
-      {{ partial "image.html" (dict "Original" $left_original "Image" $left_image) }}
-      
-    </div>
-    <div class="col">
+  {{ $size := (printf "%vx%v" $opt_width $opt_height) }}
 
-      {{ partial "image.html" (dict "Original" $right_original "Image" $right_image) }}
-
-    </div>
-  </div>
-
-{{ else if eq $format "1x1x1"  }}
-
-  {{ $left := index $images 0 }}
-  {{ $middle := index $images 1 }}
-  {{ $right := index $images 2 }}
-
-  {{ $left_original := $resources.GetMatch (printf "*%s*" $left) }}
-  {{ $middle_original := $resources.GetMatch (printf "*%s*" $middle) }}
-  {{ $right_original := $resources.GetMatch (printf "*%s*" $right) }}
-
-  {{ $left_image := "null" }}
-  {{ $middle_image := "null" }}
-  {{ $right_image := "null" }}
-
-  {{ $min_height := (math.Min $left_original.Height (math.Min $middle_original.Height $right_original.Height)) }}
-
-  {{ if eq $left_original.Height $min_height }}
-
-    {{ $left_image = $left_original.Resize "225x" }}
-    {{ $height := $left_image.Height }}
-    {{ $middle_image = $middle_original.Fill (printf "225x%v center" $height) }}
-    {{ $right_image = $right_original.Fill (printf "225x%v center" $height) }}
-
-  {{ else if eq $middle_original.Height $min_height }}
-
-    {{ $middle_image = $middle_original.Resize "225x" }}
-    {{ $height := $middle_image.Height }}
-    {{ $left_image = $left_original.Fill (printf "225x%v center" $height) }}
-    {{ $right_image = $right_original.Fill (printf "225x%v center" $height) }}
-
+  {{ $shortest_image := false }}
+  {{ if or (eq $opt_width "") (eq $opt_height "") }}
+    {{ $shortest_image = (index $originals $shortest).Resize $size }}
   {{ else }}
-
-    {{ $right_image = $right_original.Resize "225x" }}
-    {{ $height := $right_image.Height }}
-    {{ $left_image = $left_original.Fill (printf "225x%v center" $height) }}
-    {{ $middle_image = $middle_original.Fill (printf "225x%v center" $height) }}
-
+    {{ $shortest_image = (index $originals $shortest).Fill $size }}
   {{ end }}
+  {{ $height := $shortest_image.Height }}
 
   <div class="mosaic">
-    <div class="col">
-      
-      {{ partial "image.html" (dict "Original" $left_original "Image" $left_image) }}
-      
-    </div>
-    <div class="col">
+    {{ range $index, $original := $originals }}
+      <div class="col">
+        {{ $image := false }}
+        {{ if eq $index $shortest }}
+          {{ $image = $shortest_image }}
+        {{ else }}
+          {{ $image = $original.Fill (printf "%vx%v center" $opt_width $height) }}
+        {{ end }}
 
-      {{ partial "image.html" (dict "Original" $middle_original "Image" $middle_image) }}
-
-    </div>
-    <div class="col">
-
-      {{ partial "image.html" (dict "Original" $right_original "Image" $right_image) }}
-
-    </div>
+        {{ partial "image.html" (dict "Original" $original "Image" $image) }}
+      </div>
+    {{ end }}
   </div>
 
 {{ end }}

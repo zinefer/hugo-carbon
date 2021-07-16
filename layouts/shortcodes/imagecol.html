@@ -1,0 +1,24 @@
+{{ $original := .Page.Resources.GetMatch (printf "*%s*" (.Get 0)) }}
+{{ $command := .Get 1 }}
+{{ $options := .Get 2 }}
+{{ if eq $command "Fit"}}
+{{ .Scratch.Set "image" ($original.Fit $options) }}
+{{ else if eq $command "Resize"}}
+{{ .Scratch.Set "image" ($original.Resize $options) }}
+{{ else if eq $command "Fill"}}
+{{ .Scratch.Set "image" ($original.Fill $options) }}
+{{ else }}
+{{ .Scratch.Set "image" $original }}
+{{ end }}
+{{ $image := .Scratch.Get "image" }}
+{{ $class := .Get 3 }}
+<div class="float">
+    <div class="col">
+        {{ partial "image.html" (dict "Original" $original "Image" $image "Class" $class) }}
+    </div>
+    <div class="col">
+        {{ with .Inner }}
+            {{ . | markdownify }}
+        {{ end }}
+    </div>
+</div>

@@ -35,6 +35,13 @@ pre > code {
   padding: 5px;
 }
 
+h1, h2, h3, h4, h5 {
+  & > code {
+    line-height: normal;
+    padding: 5px;
+  }
+}
+
 li > code {
   padding: 2px;
 }
@@ -527,6 +534,16 @@ img {
   }
 }
 
+.float {
+  .col {
+    display: flex;
+  }
+  .col:first-child {
+    float: left;
+  }
+  clear: both;
+}
+
 
 /* Responsive */
 
@@ -588,6 +605,12 @@ img {
   }
   .mosaic {
     .col {
+      width: 100% !important;
+    }
+  }
+  .float {
+    .col {
+      float: none;
       width: 100% !important;
     }
   }

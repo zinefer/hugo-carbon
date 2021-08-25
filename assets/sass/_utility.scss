@@ -1,5 +1,5 @@
 $sides: (top, bottom, left, right);
-$margins: (0, 0.1em, 0.3em);
+$margins: (0, 0.1em, 0.3em, 2em);
 $paddings: (0, 0.1em, 0.3em);
 
 @for $i from 1 through length($margins) {

@@ -17,8 +17,7 @@
         {{ partial "image.html" (dict "Original" $original "Image" $image "Class" $class) }}
     </div>
     <div class="col">
-        {{ with .Inner }}
-            {{ . | markdownify }}
-        {{ end }}
+        {{ .Inner | .Page.RenderString (dict "display" "block") }}
     </div>
 </div>
+<div style="clear:both"></div>

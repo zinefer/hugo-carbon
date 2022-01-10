@@ -675,7 +675,7 @@ img {
 
 /* Forms */
 
-input, textarea
+input:not(.notouch), textarea:not(.notouch)
 {
   display: block;
   width: 100%;
